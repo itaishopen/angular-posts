@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {PostGridComponent} from './component/post-grid/post-grid.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [PostGridComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

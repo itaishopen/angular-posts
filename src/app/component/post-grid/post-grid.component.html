@@ -1,0 +1,16 @@
+<div *ngIf="loading$ | async; else grid">
+  <div class="spinner">Loading posts...</div>
+</div>
+
+<ng-template #grid>
+  <div class="header" *ngIf="selectedId$ | async as currentId">
+    Active Post ID: {{ currentId }}
+  </div>
+  <div class="grid">
+    <app-post-square
+      *ngFor="let post of posts$ | async; trackBy: trackById"
+      [post]="post"
+      [selectedId]="selectedId$ | async">
+    </app-post-square>
+  </div>
+</ng-template>

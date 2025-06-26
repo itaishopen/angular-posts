@@ -1,0 +1,24 @@
+
+.header {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 8px;
+
+  /* By default, responsive: minimum width per card is 8rem (128px) */
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+/* When there's enough space for 10 cards at 8rem wide (plus gaps), lock to 10 columns */
+@media (min-width: calc(10 * 8rem + 9 * 8px)) {
+  .grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+

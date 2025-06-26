@@ -1,0 +1,21 @@
+.square {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 4px;
+  overflow: hidden;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 20px;
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+}
+
+.square.selected {
+  border-color: #007aff;
+  background-color: #e0f0ff;
+}
+
