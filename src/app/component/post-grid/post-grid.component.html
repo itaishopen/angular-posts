@@ -1,10 +1,17 @@
-<div *ngIf="loading$ | async; else grid">
-  <div class="spinner">Loading posts...</div>
+<div class="loading-container" *ngIf="loading$ | async; else grid">
+  <span class="loader"></span>
 </div>
 
 <ng-template #grid>
-  <div class="header" *ngIf="selectedId$ | async as currentId">
-    Active Post ID: {{ currentId }}
+  <div class="header-container">
+    <div class="btn-wrapper">
+      <button (click)="toggle()">
+        {{ isDark() ? '🌙 Dark' : '☀️ Light' }}
+      </button>
+    </div>
+    <div class="header" *ngIf="selectedId$ | async as currentId">
+      Active Post ID: {{ currentId }}
+    </div>
   </div>
   <div class="grid">
     <app-post-square

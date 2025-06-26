@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Default Light Theme */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --grid-color: #ffffff;
+  --square-border-color: #007aff;
+  --square-bg-color: #e0f0ff;
+  --shadow-color: 0, 0, 0, 0.45;
+}
+
+body.dark-theme {
+  /* Dark mode overrides */
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --grid-color: #121212;
+  --square-border-color: #004e87;
+  --square-bg-color: #ae2800;
+  --shadow-color: 255, 255, 255, 0.45;
+
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  app-root {
+    app-post-grid {
+      .grid {
+        .square {
+          background: var(--grid-color);
+          box-shadow: 6px 6px 10px 0 rgba(var(--shadow-color));
+        }
+        .square.selected {
+          border-color: var(--square-border-color);
+          background-color: var(--square-border-color);
+        }
+      }
+    }
+  }
+}
