@@ -1,28 +1,33 @@
-import { createEffect } from '@ngrx/effects';
-import { inject } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
-import {switchMap, map, catchError} from 'rxjs/operators';
-import {loadPosts, loadPostsFailure, loadPostsSuccess} from './posts.actions';
-import {of} from 'rxjs';
+import {createEffect} from '@ngrx/effects';
+import {Injectable} from '@angular/core';
+import {Actions, ofType } from '@ngrx/effects';
+import {HttpClient} from '@angular/common/http';
+import {of, switchMap, map, catchError} from 'rxjs';
 
-export const loadPosts$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    http = inject(HttpClient)
-  ) =>
-    actions$.pipe(
+import {loadPosts, loadPostsFailure, loadPostsSuccess} from './posts.actions';
+import {Store} from '@ngrx/store';
+
+@Injectable()
+export class PostsEffects {
+  constructor(private store: Store,
+              private http: HttpClient,
+              private actions$: Actions) {
+  }
+ loadPosts$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(loadPosts),
       switchMap(() =>
-        http
-          .get<any[]>('https://jsonplaceholder.typicode.com/posts?_limit=100')
+        this.http.get<any[]>('https://jsonplaceholder.typicode.com/posts?_limit=100')
           .pipe(
             map(posts => loadPostsSuccess({ posts })),
             catchError(error =>
-              of(loadPostsFailure({ error }))  // Dispatch failure action
+              of(loadPostsFailure({ error }))
             )
           )
-      )
-    ),
-  { functional: true }
-);
+        )
+      ),
+    {functional: true}
+  );
+}
+
+

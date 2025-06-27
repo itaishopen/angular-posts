@@ -1,6 +1,7 @@
 import {Component, Input, signal, inject, OnChanges, SimpleChanges, numberAttribute} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
+
 import {selectPost} from '../../state/posts.actions';
 import {Post} from '../../state/post.model';
 
@@ -30,12 +31,21 @@ export class PostSquareComponent implements OnChanges {
     }
   }
 
+  /**
+   * Handles user clicks on the post square.
+   *
+   * - If the square was not selected,
+   *   it dispatches an NgRx action to select the post and
+   *   immediately advances the displayed field to the next one.
+   * - If the square is selected, it cycles
+   *   to the next field in the sequence (title → userId → id → body).
+   */
   handleClick() {
     if (!this.isSelected) {
       this.store.dispatch(selectPost({id: this.post.id}));
       this.currentIdx.set(1);
-    } else {
-      this.currentIdx.update(i => (i + 1) % 4);
+      return;
     }
+    this.currentIdx.update(i => (i + 1) % 4);
   }
 }
