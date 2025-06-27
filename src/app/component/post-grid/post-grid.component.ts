@@ -21,7 +21,7 @@ export class PostGridComponent {
   posts$;
   selectedId$;
   loading$
-  readonly isDarkMode = signal<boolean>(JSON.parse(localStorage.getItem('darkMode') ?? 'false'));
+  readonly isDarkMode = signal<boolean>(JSON.parse(localStorage.getItem('darkMode')!));
   constructor(private store: Store) {
     this.store.dispatch(loadPosts());
     this.posts$ = this.store.select(selectAllPosts);
