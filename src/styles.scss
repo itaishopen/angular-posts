@@ -6,6 +6,7 @@
   --square-border-color: #007aff;
   --square-bg-color: #e0f0ff;
   --shadow-color: 0, 0, 0, 0.45;
+  --btn-color: #5E5DF0;
 }
 
 body.dark-theme {
@@ -16,7 +17,7 @@ body.dark-theme {
   --square-border-color: #004e87;
   --square-bg-color: #ae2800;
   --shadow-color: 255, 255, 255, 0.45;
-
+  --btn-color: #a1a20f;
 }
 
 body {
@@ -25,6 +26,15 @@ body {
   transition: background-color 0.3s, color 0.3s;
   app-root {
     app-post-grid {
+      .header-container {
+        .btn-wrapper {
+          button {
+            background: var(--btn-color);
+            box-shadow: var(--btn-color) 0 10px 20px -10px;
+            color: var(--text-color);
+          }
+        }
+      }
       .grid {
         .square {
           background: var(--grid-color);

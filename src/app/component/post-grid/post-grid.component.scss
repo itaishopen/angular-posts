@@ -24,7 +24,7 @@
     }
   }
 }
-.header-container{
+.header-container {
   height: 70px;
   display: flex;
   position: static;
@@ -36,11 +36,8 @@
     justify-content: flex-start;
     flex-grow: 1;
     button {
-      background: #5E5DF0;
       border-radius: 999px;
-      box-shadow: #5E5DF0 0 10px 20px -10px;
       box-sizing: border-box;
-      color: #FFFFFF;
       cursor: pointer;
       font-size: 16px;
       font-weight: 700;
@@ -48,12 +45,12 @@
       opacity: 1;
       outline: 0 solid transparent;
       padding: 8px 18px;
-      user-select: none;
-      -webkit-user-select: none;
       touch-action: manipulation;
       width: fit-content;
       word-break: break-word;
       border: 0;
+      -webkit-user-select: none; /* Safari */
+      user-select: none;
     }
   }
   .header {
@@ -63,6 +60,8 @@
     align-items: center;
     flex-grow: 1.1;
     position: fixed;
+    -webkit-user-select: none; /* Safari */
+    user-select: none;
   }
 }
 
