@@ -2,9 +2,16 @@ import {createEffect} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {Actions, ofType } from '@ngrx/effects';
 import {HttpClient} from '@angular/common/http';
-import {of, switchMap, map, catchError} from 'rxjs';
+import {of, switchMap, map, catchError, tap} from 'rxjs';
 
-import {loadPosts, loadPostsFailure, loadPostsSuccess} from './posts.actions';
+import {
+  loadDarkMode,
+  loadPosts,
+  loadPostsFailure,
+  loadPostsSuccess,
+  saveDarkMode,
+  setDarkMode
+} from './posts.actions';
 import {Store} from '@ngrx/store';
 
 @Injectable()
@@ -25,8 +32,28 @@ export class PostsEffects {
             )
           )
         )
+      )
+  );
+
+  saveDarkMode$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(saveDarkMode),
+        tap((darkMode) => {
+          localStorage.setItem('darkMode', JSON.stringify(darkMode.isDarkMode));
+          return of(setDarkMode({isDarkMode: JSON.parse(localStorage.getItem('darkMode')!)}));
+        })
       ),
-    {functional: true}
+    { dispatch: false }
+  );
+
+  loadDarkMode$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(loadDarkMode),
+        tap(() => {
+          return of(setDarkMode({isDarkMode: JSON.parse(localStorage.getItem('darkMode')!)}));
+        })
+      ),
+    { dispatch: false }
   );
 }
 

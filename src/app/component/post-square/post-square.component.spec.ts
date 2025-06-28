@@ -30,9 +30,9 @@ describe('PostSquareComponent', () => {
   });
 
   it('should create component and show the post title', () => {
-    const el = fixture.debugElement.query(By.css('.square')).nativeElement;
+    const squareEl = fixture.debugElement.query(By.css('.square')).nativeElement;
     expect(component).toBeTruthy();
-    expect(el.textContent).toContain(mockPost2.title);
+    expect(squareEl.textContent).toContain(mockPost2.title);
   });
 
   it('should reset currentIdx to 0 if another id id delected', () => {
@@ -46,20 +46,22 @@ describe('PostSquareComponent', () => {
     expect(component.currentIdx()).toBe(0);
   });
 
-  it('handleClick should dispatch selectPost and move to userId on first click', () => {
-    component.selectedId = undefined;
-    component.handleClick();
+  describe('#handleClick', () => {
+    it('should dispatch selectPost and move to userId on first click', () => {
+      component.selectedId = undefined;
+      component.handleClick();
 
-    expect(store.dispatch).toHaveBeenCalledWith(selectPost({ id: 1 }));
-    expect(component.currentIdx()).toBe(1);
-  });
+      expect(store.dispatch).toHaveBeenCalledWith(selectPost({ id: 1 }));
+      expect(component.currentIdx()).toBe(1);
+    });
 
-  it('handleClick should cycle contents when already selected', () => {
-    component.selectedId = 5;
-    component.currentIdx.set(1);
-    component.handleClick();
-    expect(component.currentIdx()).toBe(1);
-  });
+    it('should cycle contents when already selected', () => {
+      component.selectedId = 5;
+      component.currentIdx.set(1);
+      component.handleClick();
+      expect(component.currentIdx()).toBe(1);
+    });
+  })
 
   it('content getter returns correct values based on currentIdx', () => {
     const values = [mockPost2.title, mockPost2.id, mockPost2.userId, mockPost2.body];

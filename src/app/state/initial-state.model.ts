@@ -4,5 +4,6 @@ export const initialState: PostsState = {
   posts: [] as Post[],
   selectedId: 0,
   loading: false,
-  error: null
+  error: null,
+  darkMode: false
 };

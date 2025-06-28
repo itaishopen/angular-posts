@@ -20,13 +20,14 @@ export class PostSquareComponent implements OnChanges {
   private store = inject(Store);
 
   get isSelected() { return this.post.id === this.selectedId; }
+
   get content() {
-    const arr = [this.post.title, this.post.userId, this.post.id, this.post.body];
-    return arr[this.currentIdx()];
+    const postLoop = [this.post.title, this.post.userId, this.post.id, this.post.body];
+    return postLoop[this.currentIdx()];
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedId'] && !this.isSelected) {
+  ngOnChanges(changePost: SimpleChanges) {
+    if (changePost['selectedId'] && !this.isSelected) {
       this.currentIdx.set(0);
     }
   }
@@ -34,10 +35,10 @@ export class PostSquareComponent implements OnChanges {
   /**
    * Handles user clicks on the post square.
    *
-   * - If the square was not selected,
+   * If the square was not selected,
    *   it dispatches an NgRx action to select the post and
    *   immediately advances the displayed field to the next one.
-   * - If the square is selected, it cycles
+   * If the square is selected, it cycles
    *   to the next field in the sequence (title → userId → id → body).
    */
   handleClick() {

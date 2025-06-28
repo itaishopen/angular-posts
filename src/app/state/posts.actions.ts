@@ -9,6 +9,9 @@ export const loadPosts = createAction('[Posts] Load Posts');
 
 export const loadDarkMode = createAction('[darkMode] Load Dark Mode');
 
+export const saveDarkMode = createAction('[darkMode] save Dark Mode', props<{ isDarkMode: boolean }>());
+export const setDarkMode = createAction('[darkMode] save Dark Mode', props<{ isDarkMode: boolean }>());
+
 
 /**
  * Action dispatched when posts have been successfully loaded from the API.
