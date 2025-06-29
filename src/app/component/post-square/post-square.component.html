@@ -1,6 +1,21 @@
 <div class="square"
      [class.selected]="isSelected"
      [class.spin]="isSpinning"
-     (click)="handleClick()">
-  {{ content }}
+     tabindex="0"
+     role="button"
+     [attr.aria-label]="'Post ID ' + post.id + ': ' + content"
+     (click)="handleClick()"
+     (keyup.enter)="handleClick()">
+  <div class="card-inner" [class.dark-theme]="darkMode">
+    <div class="card-front">
+      <div class="square-content">
+        {{ content }}
+      </div>
+    </div>
+    <div class="card-back">
+      <img [src]="darkMode ? 'assets/icon-white.png' : 'assets/icon-black.png'"
+           alt="Card back logo"
+           class="card-logo">
+    </div>
+  </div>
 </div>

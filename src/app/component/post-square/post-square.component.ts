@@ -15,9 +15,10 @@ import {Post} from '../../state/post.model';
 export class PostSquareComponent implements OnChanges {
   @Input() post!: Post;
   @Input({transform: numberAttribute}) selectedId?: number;
-  isSpinning = false;
+  @Input() darkMode!: boolean;
 
-  currentIdx = signal(0);
+  isSpinning = false;
+  currentIndex = signal(0);
   private store = inject(Store);
 
   /**
@@ -37,12 +38,12 @@ export class PostSquareComponent implements OnChanges {
    */
   get content() {
     const postLoop = [this.post.title, this.post.userId, this.post.id, this.post.body];
-    return postLoop[this.currentIdx()];
+    return postLoop[this.currentIndex()];
   }
 
   ngOnChanges(changePost: SimpleChanges) {
     if (changePost['selectedId'] && !this.isSelected) {
-      this.currentIdx.set(0);
+      this.currentIndex.set(0);
     }
   }
 
@@ -57,14 +58,15 @@ export class PostSquareComponent implements OnChanges {
    */
   handleClick() {
     this.isSpinning = true;
+    console.log(this.darkMode);
     setTimeout(() => {
       this.isSpinning = false;
     }, 600);
     if (!this.isSelected) {
       this.store.dispatch(selectPost({id: this.post.id}));
-      this.currentIdx.set(1);
+      this.currentIndex.set(1);
       return;
     }
-    this.currentIdx.update(i => (i + 1) % 4);
+    this.currentIndex.update(i => (i + 1) % 4);
   }
 }

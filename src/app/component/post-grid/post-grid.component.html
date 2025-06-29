@@ -1,16 +1,14 @@
 @if (loading$ | async) {
-  <div class="loading-container">
+  <div class="loading-container" role="status" aria-live="polite">
     <span class="loader"></span>
   </div>
 } @else {
   <div class="header-container">
-    <div class="btn-wrapper">
-      <button (click)="toggle()">
-        {{isDarkMode() ? '🌙' : '☀️' }}
-      </button>
-    </div>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode" (click)="toggle()">
+      {{ isDarkMode() ? '🌙' : '☀️' }}
+    </button>
     @if ((selectedId$ | async)! > 0) {
-      <div class="header">
+      <div class="header" aria-live="polite">
         Active Post ID: {{ selectedId$ | async }}
       </div>
     }
@@ -19,11 +17,9 @@
     @for (post of posts$ | async; track post.id) {
       <app-post-square
         [post]="post"
-        [selectedId]="selectedId$ | async">
+        [selectedId]="selectedId$ | async"
+        [darkMode]="isDarkMode()">
       </app-post-square>
     }
   </div>
 }
-
-
-

@@ -1,50 +1,27 @@
 :root {
-  /* Default Light Theme */
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --grid-color: #ffffff;
-  --square-border-color: #007aff;
-  --square-bg-color: #e0f0ff;
-  --shadow-color: 0, 0, 0, 0.45;
-  --btn-color: #5E5DF0;
+  --bg: #fdfdfd;
+  --text: #111;
+  --card-bg: #fff;
+  --shadow: 0 2px 8px rgba(0,0,0,0.05);
+  --accent: #f39c12;
+  --primary: #1e90ff;
+  --focus-ring: #1e90ff;
 }
 
-body.dark-theme {
-  /* Dark mode overrides */
-  --bg-color: #121212;
-  --text-color: #f0f0f0;
-  --grid-color: #121212;
-  --square-border-color: #004e87;
-  --square-bg-color: #ae2800;
-  --shadow-color: 255, 255, 255, 0.45;
-  --btn-color: #a1a20f;
+.dark-theme {
+  --bg: #121212;
+  --text: #f0f0f0;
+  --card-bg: #1e1e1e;
+  --shadow: 0 2px 8px rgba(255,255,255,0.08);
+  --accent: #00ffc3;
+  --primary: #ff8c00;
+  --focus-ring: #00ffc3;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 1.2s, color 1.2s;
-  app-root {
-    app-post-grid {
-      .header-container {
-        .btn-wrapper {
-          button {
-            background: var(--btn-color);
-            box-shadow: var(--btn-color) 0 10px 20px -10px;
-            color: var(--text-color);
-          }
-        }
-      }
-      .grid {
-        .square {
-          background: var(--grid-color);
-          box-shadow: 6px 6px 10px 0 rgba(var(--shadow-color));
-        }
-        .square.selected {
-          border-color: var(--square-border-color);
-          background-color: var(--square-border-color);
-        }
-      }
-    }
-  }
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
 }
