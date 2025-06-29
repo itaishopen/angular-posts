@@ -47,7 +47,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/angular-posts/"
+              "baseHref": "https://itaishopen.github.io/angular-posts/"
             },
             "development": {
               "optimization": false,
