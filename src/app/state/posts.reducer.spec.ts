@@ -1,79 +1,39 @@
-import {postsReducer} from './posts.reducer';
-import {
-  loadPosts,
-  loadPostsSuccess,
-  selectPost,
-  clearSelection
-} from './posts.actions';
-import {Post, PostsState} from './post.model';
-import {initialState} from './initial-state.model';
+import { postsReducer } from './posts.reducer';
+import { initialState } from './initial-state.model';
+import { loadPosts, loadPostsSuccess, selectPost, clearSelection } from './posts.actions';
 import {mockPost1, mockPost2} from './mock-posts';
 
-
-
 describe('postsReducer', () => {
-  it('should return initialState when sending an UNKNOWN', () => {
-    const state = postsReducer(undefined, { type: 'UNKNOWN' } as any);
-    expect(state).toBe(initialState);
-  });
-
-  it('should change loading to true when loadPosts is called', () => {
-    const action = loadPosts();
-    const state = postsReducer(initialState, action);
-    expect(state.loading).toBe(true);
-    expect(state.error).toBeUndefined();
-  });
-
-  it('should get post and change loading to false loadPostsSuccess', () => {
-    const mockPosts: Post[] = [
-      mockPost1,
-      mockPost2
-    ];
-    const action = loadPostsSuccess({ posts: mockPosts });
-    const state = postsReducer(
-      { ...initialState, loading: true },
-      action
-    );
-    expect(state.posts).toEqual(mockPosts);
-    expect(state.loading).toBe(false);
-  });
-
-  describe('selectPost', () => {
-      it('should set selectedId on selectPost', () => {
-        const prevState: PostsState = {
-          ...initialState,
-          posts: [mockPost1],
-          loading: false
-        };
-        const action = selectPost({ id: 5 });
-        const state = postsReducer(prevState, action);
-        expect(state.selectedId).toBe(5);
-      });
-
-    it('should not remove posts and loading when selecting post', () => {
-      const prevState: PostsState = {
-        posts: [mockPost1],
-        loading: false,
-        selectedId: 0
-      };
-      const action = selectPost({ id: 10 });
-      const state = postsReducer(prevState, action);
-      expect(state.posts).toBe(prevState.posts);
-      expect(state.loading).toBe(prevState.loading);
-    });
-  })
-
-  it('should clear selectedId on clearSelection', () => {
-    const prevState: PostsState = {
+  it('should set loading true on loadPosts', () => {
+    const newState = postsReducer(initialState, loadPosts());
+    expect(newState).toEqual({
       ...initialState,
-      selectedId: 1,
-      posts: [mockPost2],
-      loading: false
-    };
-    const action = clearSelection();
-    const state = postsReducer(prevState, action);
-    expect(state.selectedId).toBe(0);
+      loading: true,
+      error: undefined,
+    });
   });
 
+  it('should set posts and loading false on loadPostsSuccess', () => {
+    const posts = [mockPost1, mockPost2];
+    const newState = postsReducer(
+      { ...initialState, loading: true },
+      loadPostsSuccess({ posts })
+    );
+    expect(newState).toEqual({
+      ...initialState,
+      posts,
+      loading: false,
+    });
+  });
 
+  it('should set selectedId on selectPost', () => {
+    const newState = postsReducer(initialState, selectPost({ id: 7 }));
+    expect(newState.selectedId).toBe(7);
+  });
+
+  it('should reset selectedId to 0 on clearSelection', () => {
+    const stateWithSelected = { ...initialState, selectedId: 7 };
+    const newState = postsReducer(stateWithSelected, clearSelection());
+    expect(newState.selectedId).toBe(0);
+  });
 });

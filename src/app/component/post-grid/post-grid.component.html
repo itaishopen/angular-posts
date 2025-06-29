@@ -6,7 +6,7 @@
   <div class="header-container">
     <div class="btn-wrapper">
       <button (click)="toggle()">
-        {{isDarkMode() ? '🌙 Dark' : '☀️ Light' }}
+        {{isDarkMode() ? '🌙' : '☀️' }}
       </button>
     </div>
     @if ((selectedId$ | async)! > 0) {

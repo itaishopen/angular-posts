@@ -15,12 +15,26 @@ import {Post} from '../../state/post.model';
 export class PostSquareComponent implements OnChanges {
   @Input() post!: Post;
   @Input({transform: numberAttribute}) selectedId?: number;
+  isSpinning = false;
 
   currentIdx = signal(0);
   private store = inject(Store);
 
+  /**
+   * Indicates whether the current post is selected.
+   *
+   * @returns `true` if the post's ID matches the selected ID; otherwise, `false`.
+   */
   get isSelected() { return this.post.id === this.selectedId; }
 
+  /**
+   * Retrieves the current content to display from the post, based on the current index.
+   *
+   * Cycles through the post's `title`, `userId`, `id`, and `body` properties,
+   * returning the value at the index specified by `currentIdx()`.
+   *
+   * @returns The selected content field of the post.
+   */
   get content() {
     const postLoop = [this.post.title, this.post.userId, this.post.id, this.post.body];
     return postLoop[this.currentIdx()];
@@ -33,15 +47,19 @@ export class PostSquareComponent implements OnChanges {
   }
 
   /**
-   * Handles user clicks on the post square.
+   * Handles the click event on a post square.
    *
-   * If the square was not selected,
-   *   it dispatches an NgRx action to select the post and
-   *   immediately advances the displayed field to the next one.
-   * If the square is selected, it cycles
-   *   to the next field in the sequence (title → userId → id → body).
+   *  Triggers a spin animation by setting `isSpinning` to `true` for 600ms.
+   *  If the post is not currently selected, dispatches a `selectPost` action
+   *   with the post's ID and resets the content index to 1.
+   *  If the post is already selected, cycles the `currentIdx` to show the next
+   *   property in the post (`title`, `userId`, `id`, `body`).
    */
   handleClick() {
+    this.isSpinning = true;
+    setTimeout(() => {
+      this.isSpinning = false;
+    }, 600);
     if (!this.isSelected) {
       this.store.dispatch(selectPost({id: this.post.id}));
       this.currentIdx.set(1);

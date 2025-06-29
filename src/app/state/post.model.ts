@@ -10,5 +10,4 @@ export interface PostsState {
   selectedId: number;
   loading: boolean;
   error?: any;
-  darkMode: boolean
 }

@@ -2,15 +2,12 @@ import {createEffect} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {Actions, ofType } from '@ngrx/effects';
 import {HttpClient} from '@angular/common/http';
-import {of, switchMap, map, catchError, tap} from 'rxjs';
+import {of, switchMap, map, catchError} from 'rxjs';
 
 import {
-  loadDarkMode,
   loadPosts,
   loadPostsFailure,
   loadPostsSuccess,
-  saveDarkMode,
-  setDarkMode
 } from './posts.actions';
 import {Store} from '@ngrx/store';
 
@@ -20,6 +17,13 @@ export class PostsEffects {
               private http: HttpClient,
               private actions$: Actions) {
   }
+  /**
+   * Effect that loads posts from the JSONPlaceholder API when the `loadPosts` action is dispatched.
+   *
+   *  Sends an HTTP GET request to fetch up to 100 posts.
+   *  On success, dispatches `loadPostsSuccess` with the retrieved posts.
+   *  On failure, dispatches `loadPostsFailure` with the encountered error.
+   */
  loadPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadPosts),
@@ -33,27 +37,6 @@ export class PostsEffects {
           )
         )
       )
-  );
-
-  saveDarkMode$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(saveDarkMode),
-        tap((darkMode) => {
-          localStorage.setItem('darkMode', JSON.stringify(darkMode.isDarkMode));
-          return of(setDarkMode({isDarkMode: JSON.parse(localStorage.getItem('darkMode')!)}));
-        })
-      ),
-    { dispatch: false }
-  );
-
-  loadDarkMode$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(loadDarkMode),
-        tap(() => {
-          return of(setDarkMode({isDarkMode: JSON.parse(localStorage.getItem('darkMode')!)}));
-        })
-      ),
-    { dispatch: false }
   );
 }
 

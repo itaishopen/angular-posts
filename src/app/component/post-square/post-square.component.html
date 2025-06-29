@@ -1,3 +1,6 @@
-<div class="square" [class.selected]="isSelected" (click)="handleClick()">
+<div class="square"
+     [class.selected]="isSelected"
+     [class.spin]="isSpinning"
+     (click)="handleClick()">
   {{ content }}
 </div>
