@@ -2,6 +2,10 @@
 
 A responsive Angular 19 application that fetches 100 posts from JSONPlaceholder and displays them in a 10x10 grid layout. This project showcases advanced Angular 19 features like standalone components, signals, NgRx state management, and Jest testing, built with a modern Airbnb-style responsive UI.
 
+you can check the site at
+
+https://itaishopen.github.io/angular-posts/
+
 📸 Demo
 ![img.png](src/assets/img.png)
 
@@ -55,6 +59,9 @@ On smaller screens: collapses into an intuitive stacked layout similar to Airbnb
 👤 Author
 Itai Shopen
 Senior Frontend Developer | Angular Specialist
+
+https://www.linkedin.com/in/itai-shopen/
+
 
 📝 License
 MIT License. Feel free to fork, modify, and build on it!
