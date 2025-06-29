@@ -9,7 +9,7 @@
     </button>
     @if ((selectedId$ | async)! > 0) {
       <div class="header" aria-live="polite">
-        Active Post ID: {{ selectedId$ | async }}
+        Active Post ID: <span>{{ selectedId$ | async }}</span>
       </div>
     }
   </div>

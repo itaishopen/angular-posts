@@ -4,7 +4,7 @@
   background-color: var(--bg);
   color: var(--text);
   padding: 1rem;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 3s ease, color 3s ease;
 }
 
 .loading-container {
@@ -45,6 +45,10 @@
     font-weight: 600;
     margin: 1rem auto;
     color: var(--primary);
+    span {
+      width: 42px;
+      display: inline-block;
+    }
   }
 }
 
