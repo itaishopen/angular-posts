@@ -45,9 +45,13 @@
     font-weight: 600;
     margin: 1rem auto;
     color: var(--primary);
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
     span {
       width: 42px;
       display: inline-block;
+      user-select: none;
+      -webkit-user-select: none; /* Safari */
     }
   }
 }
@@ -59,6 +63,8 @@
   cursor: pointer;
   color: var(--text);
   transition: transform 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
 }
 
 .theme-toggle:hover {
