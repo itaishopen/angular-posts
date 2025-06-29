@@ -1,4 +1,5 @@
-🧩 Angular Posts Grid App
+✅ Angular Posts Grid App
+
 A responsive Angular 19 application that fetches 100 posts from JSONPlaceholder and displays them in a 10x10 grid layout. This project showcases advanced Angular 19 features like standalone components, signals, NgRx state management, and Jest testing, built with a modern Airbnb-style responsive UI.
 
 📸 Demo
@@ -10,9 +11,9 @@ A responsive Angular 19 application that fetches 100 posts from JSONPlaceholder 
 
 ⚡ Uses Signals for reactive state management
 
-🧠 NgRx for handling global state and effects
+✅ NgRx for handling global state and effects
 
-🧪 Unit tested with Jest
+✅ Unit tested with Jest
 
 🎨 Responsive 10x10 grid with hover and click animations
 
@@ -47,10 +48,15 @@ angular-posts/
 └── README.md
 
 git clone https://github.com/itaishopen/angular-posts.git
+
 cd angular-posts
+
 npm install
+
 ng serve
+
 📱 Responsive Design
+
 Uses CSS Grid to adapt the layout responsively.
 
 On large screens: 10x10 layout.
@@ -60,9 +66,6 @@ On smaller screens: collapses into an intuitive stacked layout similar to Airbnb
 👤 Author
 Itai Shopen
 Senior Frontend Developer | Angular Specialist
-📧 itaishopen@gmail.com
-🔗 LinkedIn
-💻 GitHub
 
 📝 License
 MIT License. Feel free to fork, modify, and build on it!
