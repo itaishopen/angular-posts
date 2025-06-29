@@ -8,9 +8,7 @@
      (keyup.enter)="handleClick()">
   <div class="card-inner" [class.dark-theme]="darkMode">
     <div class="card-front">
-      <div class="square-content">
-        {{ content }}
-      </div>
+      <div class="square-content">{{ content }}</div>
     </div>
     <div class="card-back">
       <img [src]="darkMode ? 'assets/icon-white.png' : 'assets/icon-black.png'"
